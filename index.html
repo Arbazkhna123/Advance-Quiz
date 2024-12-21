@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <title>Quiz Game</title>
+</head>
+
+<body>
+  
+  <video autoplay loop muted playsinline class="hide_print">
+    <source src="AdobeStock_892798185_Video_4K_Preview.mov" type="video/mp4"></video>
+
+<div class="container mt-5" id="container">
+  <div class="form-box">
+    <h2>Enter Your Details</h2>
+    <form id="userForm">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name:</label>
+        <input type="text" id="name" name="name" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="fatherName" class="form-label">Father's Name:</label>
+        <input type="text" id="fatherName" name="fatherName" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="rollNumber" class="form-label">Roll Number:</label>
+        <input type="text" id="rollNumber" name="rollNumber" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="class" class="form-label">Class:</label>
+        <input type="text" id="class" name="class" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="teacherName" class="form-label">Teacher's Name:</label>
+        <input type="text" id="teacherName" name="teacherName" class="form-control" required>
+      </div>
+      <div class="d-grid">
+        <button type="button" id="startQuizBtn" class="btn btn-primary" onclick="startQuiz()" disabled>Start Your Quiz</button>
+      </div>
+    </form>
+  </div>
+  <div class="quiz-box" id="quiz-box" style="display: none;">
+    <div id="timer">Time Left: 10:00</div>
+    <div id="error"></div>
+    <div class="question-box">
+      <h2 id="question"></h2>
+      <div id="options"></div>
+    </div>
+    <div class="btn mt-3">
+      <button id="next-btn" class="btn btn-primary" onclick="moveNext()">Next</button>
+      <button id="submit-btn" class="btn btn-success" onclick="submitQuiz()" style="display: none;">Submit</button>
+    </div>
+  </div>
+</div>
+
+
+<div id="art" style="display: none; ">
+  <svg id="art" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="700" height="700"
+      viewBox="0 0 1500 1500">
+      <defs>
+          <!-- Assign space and position for Company Logo -->
+          <clipPath id="clip-path">
+              <rect id="Rectangle_73" class="cls-1" width="300" height="300" />
+          </clipPath>
+          <linearGradient id="linear-gradient" x1="0.048" y1="0.5" x2="0.963" y2="0.5"
+              gradientUnits="objectBoundingBox">
+              <stop offset="0" stop-color="#000000" />
+              <stop offset="1" stop-color="#D4AF37" />
+          </linearGradient>
+          <clipPath id="clip-path-5">
+              <rect id="Rectangle_79" class="cls-2" width="112" height="109" transform="translate(541 1246)" />
+          </clipPath>
+          <!-- Assign space and position for signature -->
+          <clipPath id="clip-path-6">
+              <rect id="Rectangle_78" class="cls-2" width="300" height="300" />
+          </clipPath>
+          <!-- Assign space and position for QR Code-->
+          <clipPath id="clip-path-7">
+              <rect id="Rectangle_77" class="cls-1" width="230.947" height="230.947" />
+          </clipPath>
+          <!-- Assign space and position for QR Code-->
+          <clipPath id="clip-path-8">
+              <rect id="Rectangle_76" class="cls-1" width="260.462" height="270.788" />
+          </clipPath>
+          <clipPath id="clip-Artboard_2">
+              <rect width="1500" height="1500" />
+          </clipPath>
+          <!-- Assign image to Company logo -->
+          <pattern id="pattern" preserveAspectRatio="none" width="100%" height="100%" viewBox="0 0 300 300">
+              <image width="300" height="300" xlink:href="logo.jpeg" />
+          </pattern>
+          <!-- Assign image to Signature -->
+          <pattern id="pattern-1" preserveAspectRatio="none" width="100%" height="100%" viewBox="0 0 350 150">
+              <image width="356" height="150"
+                  xlink:href="https://placeholder.com/wp-content/uploads/2018/10/placeholder-1.png" />
+          </pattern>
+          <!-- Assign image for QR Code-->
+          <pattern id="pattern-3" preserveAspectRatio="none" width="100%" height="100%" viewBox="0 0 350 350">
+              <image width="350" height="350" x="0" y="0" xlink:href="qrcode.png" />
+          </pattern>
+      </defs>
+      <g id="Artboard_2" class="cls-3">
+          <rect class="cls-29" width="1500" height="1500" />
+          <g id="left-image" transform="translate(-222.941 79.324)">
+              <path id="left-shape-1" class="cls-4" d="M222.941-79.324h282l-282,986Z" />
+              <path id="left-shape-2" class="cls-5" d="M504.941,466.676H348.783l-125.842,440v56Z" />
+              <path id="left-shape-3" class="cls-6" d="M425.7,197.749,348.783,466.676H504.941Z" />
+          </g>
+          <g id="right-image" transform="translate(1.677 -2.588)">
+              <path id="right-shape-1" class="cls-4" d="M1498.823,101.588l-371.5,1401h371.5Z" />
+              <path id="right-shape-2" class="cls-6" d="M1241.323,539.588H1382.68l-71.926,271.247Z" />
+              <path id="right-shape-3" class="cls-5" d="M1498.823,54.588l-257.5,485H1382.68l116.143-438Z" />
+              <path id="right-shape-4" class="cls-7" d="M1383.823,2.588l-142.5,537,257.5-485v-52Z" />
+          </g>
+          
+          <!-- Assign space and position for company logo -->
+          <g id="company-logo-2" transform="translate(620 60)">
+              <g id="Group_291-2" class="cls-8" transform="translate(0 0)">
+                  <rect id="Rectangle_71-2" class="cls-9" width="300" height="300" />
+              </g>
+          </g>
+          <text id="CERTIFICATE" class="cls-10" transform="translate(750 420.162)">
+              <tspan x="0" y="0" dominant-baseline="middle" text-anchor="middle">
+                  CERTIFICATE
+              </tspan>
+          </text>
+          <text id="OF_COMPLETION" class="cls-13" transform="translate(750 515.662)">
+              <tspan x="0" y="0" dominant-baseline="middle" text-anchor="middle">
+                  OF COMPLETION
+              </tspan>
+          </text>
+          <text id="STUDENT_NAME" class="cls-14" transform="translate(750 671.662)">
+              <tspan x="0" y="0" id="user_name" dominant-baseline="middle" text-anchor="middle">
+                  Arbaz Khan
+              </tspan>
+          </text>
+          <text id="HAS_SUCCESSFULLY_COMPLEATED" class="cls-15" transform="translate(750 746)">
+              <tspan x="0" y="0" id="percen" dominant-baseline="middle" text-anchor="middle">
+              </tspan>
+          </text>
+
+          <text id="COURSE_NAME" class="cls-16" transform="translate(750 825.377)">
+              <tspan x="0" y="0" dominant-baseline="middle" text-anchor="middle">
+                  Web Development
+              </tspan>
+          </text>
+          <text id="course_by:" class="cls-15" transform="translate(750 940)">
+              <tspan x="0" y="0" dominant-baseline="middle" text-anchor="middle">
+                  course by:
+              </tspan>
+          </text>
+          <text id="ORGANIZATION_NAME" class="cls-17" transform="translate(750 990)">
+              <tspan x="0" y="0" dominant-baseline="middle" text-anchor="middle">
+                  Arbaz khan Institute
+              </tspan>
+          </text>
+          <g id="Group_302" transform="translate(580 51)">
+              <rect id="Rectangle_74" class="cls-18" width="336" height="96" rx="48" transform="translate(0 1028)" />
+              <text id="PASSED"  class="cls-19" transform="translate(170 1080)">
+                  <tspan x="0" y="0" id="grade" dominant-baseline="middle" text-anchor="middle">
+                  </tspan>
+              </text>
+          </g>
+          <g id="Group_300" transform="translate(0 21)">
+              <g id="Group_298" transform="translate(0 41.5)">
+                  <text id="AUTHOR_DESIGNATION" class="cls-20" transform="translate(960 1352.696)">
+                      <tspan x="0" y="0" dominant-baseline="middle" text-anchor="middle">
+                          CEO ARBAZ khan
+                      </tspan>
+                  </text>
+                  <text id="AUTHOR_NAME" class="cls-21" transform="translate(960 1300)">
+                      <tspan x="0" y="0" dominant-baseline="middle" text-anchor="middle">
+                          _____________________
+                      </tspan>
+                  </text>
+              </g>
+              <g id="Group_303" transform="translate(308.333 41.5)">
+                  <text id="DATE" class="cls-22" transform="translate(1018.667 1352.696)">
+                      <tspan x="0" y="0" dominant-baseline="middle" text-anchor="middle">
+                          DATE
+                      </tspan>
+                  </text>
+                  <text id="CERTIFICATE_DATE" class="cls-23" transform="translate(1018.667 1300)">
+                      <tspan x="0" y="0" id="certi_date" dominant-baseline="middle" text-anchor="middle">
+                          01 Jan 2020
+                      </tspan>
+                  </text>
+              </g>
+              <g id="Group_299" transform="translate(-827 41.5)">
+                  <text id="CERTIFICATE_NUMBER_TEXT" class="cls-20" transform="translate(1044 1352.696)">
+                      <tspan x="0" y="0" dominant-baseline="middle" text-anchor="middle">
+                          Certificate Number
+                      </tspan>
+                  </text>
+                  <text id="CERTIFICATE_NUMBER" class="cls-21" transform="translate(1044 1300)">
+                      <tspan x="0" y="0" dominant-baseline="middle" text-anchor="middle">
+                          7896
+                      </tspan>
+                  </text>
+              </g>
+              <!-- Assign space and position for QR code -->
+              <g id="qrcode" transform="translate(540 1250)">
+                  <g id="Group_295" class="cls-27" transform="translate(0 0)" dominant-baseline="middle"
+                      text-anchor="middle">
+                      <rect id="Rectangle_75" class="cls-28" width="150" height="150" />
+                  </g>
+              </g>
+          </g>
+      </g>
+  </svg>
+  <button onclick="print()" class="hide_print">Print</button>
+</div>
+<script>
+let questions = [
+  { 'ques': 'Which team won the Cricket World Cup 1992?', 'a': 'Pakistan', 'b': 'India', 'c': 'Australia', 'd': 'West Indies', 'correct': 'a' },
+  { 'ques': 'Who holds the record for the most goals in FIFA World Cup history?', 'a': 'Cristiano Ronaldo', 'b': 'Pele', 'c': 'Miroslav Klose', 'd': 'Lionel Messi', 'correct': 'c' },
+  { 'ques': 'Which is the largest planet in our Solar System?', 'a': 'Earth', 'b': 'Mars', 'c': 'Jupiter', 'd': 'Saturn', 'correct': 'c' },
+  { 'ques': 'What is the capital of France?', 'a': 'Paris', 'b': 'Rome', 'c': 'Madrid', 'd': 'Berlin', 'correct': 'a' },
+  { 'ques': 'What is 5 + 3?', 'a': '5', 'b': '8', 'c': '10', 'd': '15', 'correct': 'b' },
+  // { 'ques': 'What is the color of the sky?', 'a': 'Blue', 'b': 'Green', 'c': 'Red', 'd': 'Yellow', 'correct': 'a' },
+  // { 'ques': 'How many continents are there?', 'a': '5', 'b': '6', 'c': '7', 'd': '8', 'correct': 'c' },
+  // { 'ques': 'What is the capital of Pakistan?', 'a': 'Karachi', 'b': 'Lahore', 'c': 'Islamabad', 'd': 'Peshawar', 'correct': 'c' },
+  // { 'ques': 'What is the boiling point of water?', 'a': '90°C', 'b': '80°C', 'c': '100°C', 'd': '110°C', 'correct': 'c' },
+  // { 'ques': 'Which language is used to create web pages?', 'a': 'Python', 'b': 'Java', 'c': 'HTML', 'd': 'C++', 'correct': 'c' },
+];
+
+let score = 0;
+let index = 0;
+let total = questions.length;
+let timerInterval;
+
+// Enable button only if form is valid
+const form = document.getElementById('userForm');
+const startQuizBtn = document.getElementById('startQuizBtn');
+form.addEventListener('input', () => {
+  startQuizBtn.disabled = !form.checkValidity();
+});
+
+// Store form data in localStorage
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+  const formData = {
+    name: document.getElementById('name').value,
+    fatherName: document.getElementById('fatherName').value,
+    rollNumber: document.getElementById('rollNumber').value,
+    class: document.getElementById('class').value,
+    teacherName: document.getElementById('teacherName').value
+  };
+  localStorage.setItem('userData', JSON.stringify(formData));
+});
+
+// Start Quiz
+function startQuiz() {
+  document.querySelector('.form-box').style.display = 'none';
+  document.getElementById('quiz-box').style.display = 'block';
+  startTimer(6 * 60); // Start 10-minute timer
+  loadQuestion();
+}
+
+// Load Question
+function loadQuestion() {
+  const question = questions[index];
+  document.getElementById('question').innerText = `${index + 1}) ${question.ques}`;
+  const optionsElement = document.getElementById('options');
+  optionsElement.innerHTML = '';
+  for (let key of ['a', 'b', 'c', 'd']) {
+    optionsElement.innerHTML += `
+      <div class="${key === 'b' ? 'right-align' : ''}">
+        <input type="radio" name="option" value="${key}" id="option-${key}">
+        <label for="option-${key}">${question[key]}</label>
+      </div>`;
+  }
+}
+
+// Timer Functionality
+function startTimer(seconds) {
+  const timer = document.getElementById('timer');
+  timerInterval = setInterval(() => {
+    const minutes = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    timer.innerText = `Time Left: ${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+    if (seconds === 180 ) {
+    document.getElementById('error').innerHTML = '<div class="alert alert-danger" role="alert"><marquee behavior="" direction="">Timme is going to be over</marquee></div>';
+    }else if(seconds === 150){
+      document.getElementById('error').innerHTML = '';
+    }
+    if (seconds === 60 ) {
+    document.getElementById('error').innerHTML = '<div class="alert alert-danger" role="alert"><marquee behavior="" direction="">Timme is going to be over</marquee></div>';
+    }
+    if (--seconds < 0) {
+      clearInterval(timerInterval);
+      submitQuiz();
+    }
+  }, 1000);
+}
+
+// Move to Next Question
+function moveNext() {
+  const selectedOption = document.querySelector('input[name="option"]:checked');
+  if (!selectedOption) {
+    
+    document.getElementById('error').innerHTML = '<div class="alert alert-danger" role="alert">Please Select an Option</div>';
+    // Swal.fire('Please select an answer before moving forward!');
+    return;
+  }else{
+    document.getElementById('error').innerHTML = '';
+  }
+  if (selectedOption.value === questions[index].correct) {
+    score++;
+  }
+  index++;
+  if (index < total) {
+    loadQuestion();
+  } else {
+    document.getElementById('next-btn').style.display = 'none';
+    document.getElementById('submit-btn').style.display = 'block';
+  }
+}
+
+// Submit Quiz
+function submitQuiz() {
+
+  var percen = score/total*100;
+    // Get current date and time
+    if(percen > 50){
+      grade = 'Passed';
+    }else{
+      grade = 'Failed';
+    }
+
+
+    var today = new Date();
+    
+    // Format date
+    var months = [
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+    var mm = months[today.getMonth()]; // Get the month name
+    var dd = String(today.getDate()).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    
+
+    // Combine date and time
+    var date = dd + ' ' + mm + ' ' + yyyy;
+
+    // Display the date and time
+    // document.write("Current Date and Time: " + date + " " + time);
+    
+    // Update the certificate fields
+    document.getElementById('grade').innerHTML = grade;
+    document.getElementById('certi_date').innerHTML = date;
+    document.getElementById('percen').innerHTML = 'Has successfully completed With '+percen+'%';
+    document.getElementById('art').style.display = '';
+    document.getElementById('quiz-box').style.display = 'none';
+    document.getElementById('container').style.display = 'none';
+    document.getElementById('user_name').innerHTML = document.getElementById('name').value;
+
+
+
+
+  // clearInterval(timerInterval); // Stop the timer
+  // Swal.fire({
+  //   title: 'Quiz Submitted!',
+  //   text: `Your score: ${score} / ${total}`,
+  //   icon: 'success',
+  //   confirmButtonText: 'Play Again'
+  // }).then(() => {
+  //   location.reload(); // Reload page to restart
+  // });
+}
+</script>
+
+</body>
+</video>
+</html>
